@@ -1,268 +1,58 @@
-Real Estate Marketplace — System Design & Development Plan
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Kumar, let's design your startup as a Laravel monolithic application first. This keeps development and hosting simpler, while leaving room to add APIs, React, mobile apps, and scaling later.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-1. Final technology stack
+## About Laravel
 
-Layer
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-Technology
-Customer website
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel Blade + Livewire + Alpine.js
-Admin panel
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-Laravel Blade + Livewire
-Backend
+## Learning Laravel
 
-Laravel
-Database
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-MySQL
-Styling
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-Tailwind CSS or Bootstrap
-Authentication
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-Laravel authentication
-Images
+## Agentic Development
 
-Local storage initially; object storage later
-Payments
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
-Payment gateway integration
-Maps
+```bash
+composer require laravel/boost --dev
 
-Map provider API, when required
-Hosting
+php artisan boost:install
+```
 
-Your server team's Laravel-supported hosting
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-Initial architecture: Laravel monolith + MySQL. Avoid microservices, Kubernetes, and a separate React frontend during the first MVP.
+## Contributing
 
-2. High-level system design
-Users
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-Buyers • Tenants • Owners • Agents • Builders
+## Code of Conduct
 
-Public Website
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Home • Search • Property Details • Enquiries
+## Security Vulnerabilities
 
-Laravel Application
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Routes • Controllers • Services • Policies • Validation
+## License
 
-Customer Module
-
-Admin Module
-
-Listing Module
-
-Payment & Leads
-
-MySQL
-
-Users • Properties • Locations • Enquiries • Payments
-
-3. User roles
-
-Start with these roles:
-
-Role
-
-Main permissions
-Buyer/Tenant
-
-Search properties, save properties, send enquiries
-Owner
-
-Add and manage own properties
-Agent/Broker
-
-Manage listings and leads
-Builder/Developer
-
-Manage projects and properties
-Admin
-
-Approve listings, manage users, payments, CMS
-Super Admin
-
-Full administrative access
-
-Use Laravel authorization policies and middleware. Never rely only on hiding buttons in the frontend.
-
-4. What should you build first?
-
-Do not start with every feature. Build the MVP in the following order.
-
-Project foundation
-Phase 1
-
-Create Laravel project and Git repository.
-
-Configure MySQL and environment variables.
-
-Set up development, staging, and production configuration.
-
-Configure authentication and basic layouts.
-
-User and role management
-Phase 2
-
-Registration and login.
-
-Buyer, owner, agent, and builder profiles.
-
-Admin user management.
-
-Role and permission checks.
-
-Property management
-Phase 3
-
-Property creation and editing.
-
-Buy/rent purpose.
-
-Property type, price, area, bedrooms, amenities.
-
-Image uploads.
-
-Draft and approval workflow.
-
-Public website and search
-Phase 4
-
-Homepage.
-
-Property listing page.
-
-Search and filters.
-
-Property details page.
-
-Responsive mobile design.
-
-Admin moderation
-Phase 5
-
-Admin dashboard.
-
-Review submitted properties.
-
-Approve/reject listings.
-
-Manage users, locations, amenities, and property types.
-
-Enquiries and dashboards
-Phase 6
-
-Enquiry form.
-
-Owner/agent lead dashboard.
-
-WhatsApp click-to-chat.
-
-Email notifications.
-
-Paid listings and growth features
-Phase 7
-
-Listing plans.
-
-Payment integration.
-
-Featured/promoted properties.
-
-SEO landing pages.
-
-Analytics and reporting.
-
-5. Database design
-
-Start with these core tables.
-
-Core database tables
-
-users
-
-id, name, email, phone, password, status
-
-roles / user_roles
-
-Role assignments and permissions
-
-properties
-
-owner_id, title, purpose, type, price, area, status, location_id
-
-property_images
-
-property_id, file_path, sort_order, is_primary
-
-locations
-
-State, city, locality, coordinates
-
-amenities / property_amenities
-
-Amenities assigned to properties
-
-enquiries
-
-property_id, user_id, recipient_id, message, status
-
-plans / payments / property_promotions
-
-Paid listing functionality
-
-Recommended property status
-draft
-  ↓
-submitted
-  ↓
-under_review
-  ├── rejected
-  └── approved
-        ↓
-      published
-        ↓
-      expired / archived
-
-The status should be controlled by backend rules, not directly trusted from user-submitted form data.
-
-6. Laravel project structure
-app/
-├── Http/
-│   ├── Controllers/
-│   │   ├── Frontend/
-│   │   ├── Admin/
-│   │   └── Owner/
-│   ├── Requests/
-│   └── Middleware/
-├── Models/
-├── Services/
-├── Policies/
-└── Jobs/
-
-resources/
-├── views/
-│   ├── frontend/
-│   ├── admin/
-│   └── components/
-├── css/
-└── js/
-
-routes/
-├── web.php
-├── admin.php
-└── api.php
-
-database/
-├── migrations/
-├── seeders/
-└── factories/
-
-Use services for complicated business logic—for example, publishing a property, processing a payment, or creating a promoted listing.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
